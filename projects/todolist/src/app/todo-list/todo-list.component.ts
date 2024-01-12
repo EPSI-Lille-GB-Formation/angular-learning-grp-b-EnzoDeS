@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TODOS } from '../mock-todo';
 import { TodoComponent } from '../todo/todo.component';
+import { subscribe } from 'diagnostics_channel';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'todo-list',
@@ -50,6 +52,15 @@ export class TodoList_Component {
   completedFilter = false;
 
   allList = false;
+
+  constructor(private todoService: TodoService) {}
+
+  ngOnInit(): void {
+    this.todoService
+      .getTodoList()
+      .subscribe((todos) => (this.todoList = todos));
+    this.todoService.getTodoById(5).subscribe((todo) => console.log(todo));
+  }
 
   onClickTodo() {
     this.completedFilter = false;
