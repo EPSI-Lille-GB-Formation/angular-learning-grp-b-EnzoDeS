@@ -20,6 +20,7 @@ import { BorderHighlightDirective } from '../border-highlight.directive';
         </label>
         <div class="action">
           <a href="#">Edit</a>
+          <a role="button" (click)="GoToTaskDetails()">Retour à l'accueil</a>
           <a href="#">Delete</a>
         </div>
       </div>
