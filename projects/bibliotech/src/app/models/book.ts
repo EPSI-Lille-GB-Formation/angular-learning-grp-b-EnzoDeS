@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export class Book {
   constructor(
     public id: number,
@@ -5,7 +7,8 @@ export class Book {
     public resume: string,
     public images: string,
     public createdAt: Date,
-    public updatedAt: Date
+    public updatedAt: Date,
+    public user: User
   ) {
     this.createdAt = new Date();
   }

@@ -6,9 +6,10 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  template: ` <h1>hello world</h1>
+    <router-outlet></router-outlet>`,
+  styles: [],
 })
 export class AppComponent {
-  title = 'bibliotech';
+  constructor() {}
 }
