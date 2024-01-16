@@ -8,7 +8,7 @@ export class Book {
     public images: string,
     public createdAt: Date,
     public updatedAt: Date,
-    public user: User
+    public userId: number
   ) {
     this.createdAt = new Date();
   }

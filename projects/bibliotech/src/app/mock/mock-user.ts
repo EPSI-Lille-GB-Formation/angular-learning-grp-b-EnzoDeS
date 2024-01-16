@@ -11,7 +11,7 @@ export const USERS: User[] = [
   },
   {
     id: 2,
-    firstname: 'test2',
+    firstname: 'Enzo',
     lastname: 'lastnametest2',
     email: 'test2@test.fr',
     password: 'test2',
