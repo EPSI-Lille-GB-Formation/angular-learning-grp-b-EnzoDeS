@@ -6,6 +6,7 @@ import { BOOKS } from '../mock/mock-book';
   standalone: true,
   imports: [],
   template: `
+  <p>Moi je suis le book</p>
   <article *ngFor="let book of Bibliotech">
 {{book.title}}
 </artcile>
