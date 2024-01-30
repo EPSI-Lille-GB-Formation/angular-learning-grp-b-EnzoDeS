@@ -1,9 +1,9 @@
-import { Component,OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookComponent } from './book.component';
 import { Observable } from 'rxjs';
 import { book } from '../models/book';
-import { BookService } from '../book.service';
+import { BookService } from '../service/book.service';
 
 @Component({
   selector: 'app-booklist',
@@ -11,9 +11,6 @@ import { BookService } from '../book.service';
   imports: [CommonModule, BookComponent],
   template: `
     <div>
-      <div>
-        <button>Ajouter un livre ⊕</button>
-      </div>
       <h2>Liste des livres:</h2>
       <div class="listBook">
         <ng-container *ngFor="let book of bookList | async">
@@ -24,7 +21,7 @@ import { BookService } from '../book.service';
   `,
   styles: ``,
 })
-export class BooklistComponent  implements OnInit  {
+export class BooklistComponent implements OnInit {
   bookList: Observable<book[]> = new Observable<book[]>();
 
   constructor(private bookService: BookService) {}
