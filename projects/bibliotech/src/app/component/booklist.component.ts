@@ -1,38 +1,35 @@
-import { Component } from '@angular/core';
+import { Component,OnInit  } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BOOKS } from '../mock/mock-book';
+import { BookComponent } from './book.component';
+import { Observable } from 'rxjs';
+import { book } from '../models/book';
+import { BookService } from '../book.service';
 
 @Component({
   selector: 'app-booklist',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, BookComponent],
   template: `
-    <article>
-      <h1>Voici la BiblioTech</h1>
-      <h1>BookList</h1>
-      <div *ngFor="let book of BookList">
-        <article>
-          {{ book.title }}
-          <div class="grid">
-            <div>
-              <br />
-              <button>Modifier</button>
-            </div>
-            <div>
-              <br />
-              <button>Détail</button>
-            </div>
-            <div>
-              <br />
-              <button>Supprimer</button>
-            </div>
-          </div>
-        </article>
+    <div>
+      <div>
+        <button>Ajouter un livre ⊕</button>
       </div>
-    </article>
+      <h2>Liste des livres:</h2>
+      <div class="listBook">
+        <ng-container *ngFor="let book of bookList | async">
+          <app-book [value]="book"></app-book>
+        </ng-container>
+      </div>
+    </div>
   `,
   styles: ``,
 })
-export class BooklistComponent {
-  BookList: any[] = BOOKS;
+export class BooklistComponent  implements OnInit  {
+  bookList: Observable<book[]> = new Observable<book[]>();
+
+  constructor(private bookService: BookService) {}
+
+  ngOnInit() {
+    this.bookList = this.bookService.getBooks();
+  }
 }

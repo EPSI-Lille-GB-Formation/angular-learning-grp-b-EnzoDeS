@@ -1,20 +1,41 @@
-import { Component } from '@angular/core';
-import { BOOKS } from '../mock/mock-book';
+// book.component.ts
+
+import { Component, Input } from '@angular/core';
+import { argv, argv0 } from 'process';
+import { __values } from 'tslib';
+import { book } from '../models/book';
 import { CommonModule } from '@angular/common';
-import '@picocss/pico';
 
 @Component({
-  selector: 'app-book.component',
+  selector: 'app-book',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <p>Moi je suis le book</p>
-    <article *ngFor="let book of Book">
-      {{ book.title }}{{ book.resume }}
+    <article>
+      <div>
+        <article>
+          {{ Book?.title }}
+          <div class="grid">
+            <div>
+              <br />
+              <button>Modifier</button>
+            </div>
+            <div>
+              <br />
+              <button>Détail</button>
+            </div>
+            <div>
+              <br />
+              <button>Supprimer</button>
+            </div>
+          </div>
+        </article>
+      </div>
     </article>
   `,
   styles: ``,
 })
 export class BookComponent {
-  Book = BOOKS;
+  @Input('value')
+  Book: book | undefined;
 }
