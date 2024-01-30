@@ -10,11 +10,11 @@ import '@picocss/pico';
   template: `
     <p>Moi je suis le book</p>
     <article *ngFor="let book of Book">
-      {{ book.title }}
+      {{ book.title }}{{ book.resume }}
     </article>
   `,
   styles: ``,
 })
-export class BookComponentComponent {
+export class BookComponent {
   Book = BOOKS;
 }
