@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
+import { ReactiveFormsModule } from '@angular/forms';
 import { routes } from './app.routes';
 import { InMemoryDataService } from './service/in-memory-data.service';
 
@@ -15,5 +16,6 @@ export const appConfig: ApplicationConfig = {
         dataEncapsulation: false,
       }),
     ]),
+    ReactiveFormsModule,
   ],
 };

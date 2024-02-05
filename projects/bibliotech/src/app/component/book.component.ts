@@ -11,27 +11,25 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <article>
-      <div>
-        <article>
-          {{ Book?.title }}
-          <div class="grid">
-            <div>
-              <br />
-              <button>Modifier</button>
-            </div>
-            <div>
-              <br />
-              <button>Détail</button>
-            </div>
-            <div>
-              <br />
-              <button>Supprimer</button>
-            </div>
+    <div>
+      <article>
+        {{ Book?.title }}
+        <div class="grid">
+          <div>
+            <br />
+            <button>Modifier</button>
           </div>
-        </article>
-      </div>
-    </article>
+          <div>
+            <br />
+            <button>Détail</button>
+          </div>
+          <div>
+            <br />
+            <button>Supprimer</button>
+          </div>
+        </div>
+      </article>
+    </div>
   `,
   styles: ``,
 })

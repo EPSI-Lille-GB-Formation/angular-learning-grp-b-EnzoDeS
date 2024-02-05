@@ -12,7 +12,12 @@ export class BookService {
   constructor(private http: HttpClient) {}
 
   // méthode pour récupérer la liste des livres
+  
   getBooks(): Observable<book[]> {
-    return this.http.get<book[]>(this.apiURL);
+    return this.http.get<book[]>(this.apiURL);    
+  }
+    // méthode pour créer un livre
+  createBook(newBook: book): Observable<book> {
+    return this.http.post<book>(this.apiURL, newBook);
   }
 }
