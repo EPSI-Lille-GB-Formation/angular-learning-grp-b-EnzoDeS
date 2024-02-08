@@ -34,4 +34,10 @@ export class BookService {
     const URL = `${this.apiURL}/${bookId}`;
     return this.http.delete<void>(URL);
   }
+
+  // méthode pour récupérer un livre par son id
+  getBookById(id: number): Observable<book | undefined> {
+    const URL = `${this.apiURL}/${id}`;
+    return this.http.get<book | undefined>(URL);
+  }
 }
