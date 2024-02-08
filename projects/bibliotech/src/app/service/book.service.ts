@@ -16,8 +16,22 @@ export class BookService {
   getBooks(): Observable<book[]> {
     return this.http.get<book[]>(this.apiURL);    
   }
+  
     // méthode pour créer un livre
   createBook(newBook: book): Observable<book> {
     return this.http.post<book>(this.apiURL, newBook);
+  }
+  
+  // méthode pour générer un nouvel id
+  genIdBook(collection: book[]): number {
+    return collection.length > 0
+      ? Math.max(...collection.map((item) => item.id)) + 1
+      : 1;
+  }
+
+  // méthode pour supprimer un livre
+  deleteBook(bookId: number): Observable<void> {
+    const URL = `${this.apiURL}/${bookId}`;
+    return this.http.delete<void>(URL);
   }
 }

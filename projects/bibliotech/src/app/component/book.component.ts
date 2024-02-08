@@ -12,8 +12,11 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
     <div>
-      <article>
-        {{ Book?.title }}
+      <article *ngIf="Book">
+        <div>
+          <img [src]= 'Book.image'/>
+        </div>
+        {{ Book.title }} 
         <div class="grid">
           <div>
             <br />
