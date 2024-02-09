@@ -5,7 +5,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { routes } from './app.routes';
-import { InMemoryDataService } from './service/in-memory-data.service';
+import { InMemoryDataService } from './component/book/service/in-memory-data.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [

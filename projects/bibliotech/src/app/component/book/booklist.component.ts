@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookComponent } from './book.component';
 import { Observable } from 'rxjs';
-import { book } from '../models/book';
-import { BookService } from '../service/book.service';
+import { book } from '../../models/book';
+import { BookService } from './service/book.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -22,7 +22,10 @@ import { Router } from '@angular/router';
       </article>
       <div class="listBook">
         <ng-container *ngFor="let book of bookList | async">
-          <app-book [value]="book"  (bookDeleted)="onBookDeleted($event)" ></app-book>
+          <app-book
+            [value]="book"
+            (bookDeleted)="onBookDeleted($event)"
+          ></app-book>
         </ng-container>
       </div>
     </div>

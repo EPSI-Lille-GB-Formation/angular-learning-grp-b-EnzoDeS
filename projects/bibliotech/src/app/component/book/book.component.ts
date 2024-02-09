@@ -3,9 +3,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { argv, argv0 } from 'process';
 import { __values } from 'tslib';
-import { book } from '../models/book';
+import { book } from '../../models/book';
 import { CommonModule } from '@angular/common';
-import { BookService } from '../service/book.service';
+import { BookService } from './service/book.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book',
@@ -15,9 +16,9 @@ import { BookService } from '../service/book.service';
     <div>
       <article *ngIf="Book">
         <div>
-          <img [src]= 'Book.image'/>
+          <img [src]="Book.image" />
         </div>
-        {{ Book.title }} 
+        {{ Book.title }}
         <div class="grid">
           <div>
             <br />
@@ -25,11 +26,11 @@ import { BookService } from '../service/book.service';
           </div>
           <div>
             <br />
-            <button>Détail</button>
+            <button (click)="openBookDetail()">Détail</button>
           </div>
           <div>
             <br />
-            <button (click)="deleteBookById(Book)">Supprimer</button>
+              <button (click)="deleteBookById(Book)">Supprimer</button>
           </div>
         </div>
       </article>
@@ -40,29 +41,29 @@ import { BookService } from '../service/book.service';
 export class BookComponent {
   @Input('value')
   Book: book | undefined;
-  bookList : book[] = [];
+  bookList: book[] = [];
   @Output() bookDeleted: EventEmitter<number> = new EventEmitter<number>();
 
-    constructor(private bookService: BookService) {
-      
-     }
+  constructor(private bookService: BookService, private router: Router) {}
 
   deleteBookById(Book: book): void {
     this.bookService.deleteBook(Book.id).subscribe(
       () => {
         console.log('Livre supprimé avec succès');
         // Mettre ici toute logique à exécuter après la suppression du livre
-        this.bookService.getBooks().subscribe(books => {
-            this.bookList = books;
-            console.log(this.bookList);
-            this.bookDeleted.emit(Book.id);
-          })
-        
+        this.bookService.getBooks().subscribe((books) => {
+          this.bookList = books;
+          console.log(this.bookList);
+          this.bookDeleted.emit(Book.id);
+        });
       },
       (error) => {
         console.error('Erreur lors de la suppression du livre:', error);
         // Gérer l'erreur, par exemple afficher un message à l'utilisateur
       }
     );
+  }
+  openBookDetail() {
+    if (this.Book?.id) this.router.navigate(['/book-read', this.Book.id]);
   }
 }
