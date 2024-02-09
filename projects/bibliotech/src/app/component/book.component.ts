@@ -5,6 +5,7 @@ import { argv, argv0 } from 'process';
 import { __values } from 'tslib';
 import { book } from '../models/book';
 import { CommonModule } from '@angular/common';
+import { BookService } from '../service/book.service';
 
 @Component({
   selector: 'app-book',
@@ -28,7 +29,7 @@ import { CommonModule } from '@angular/common';
           </div>
           <div>
             <br />
-            <button>Supprimer</button>
+            <button (click)="deleteBookById(Book)">Supprimer</button>
           </div>
         </div>
       </article>
@@ -39,4 +40,27 @@ import { CommonModule } from '@angular/common';
 export class BookComponent {
   @Input('value')
   Book: book | undefined;
+  bookList : book[] = [];
+
+    constructor(private bookService: BookService) {
+      
+     }
+
+  deleteBookById(Book: book): void {
+    this.bookService.deleteBook(Book.id).subscribe(
+      () => {
+        console.log('Livre supprimé avec succès');
+        // Mettre ici toute logique à exécuter après la suppression du livre
+        this.bookService.getBooks().subscribe(books => {
+            this.bookList = books;
+            console.log(this.bookList);
+          })
+        
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression du livre:', error);
+        // Gérer l'erreur, par exemple afficher un message à l'utilisateur
+      }
+    );
+  }
 }

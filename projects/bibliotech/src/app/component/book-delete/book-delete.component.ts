@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../service/book.service';
-import { book } from '../../models/book'; // Assuming 'book' is the correct class name
+import { book } from '../../models/book'; 
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-delete',
   template: ` <div>
     <h2>Supprimer le livre</h2>
-    <p>Êtes-vous sûr de vouloir supprimer le livre " {{ book?.title }} " ?</p>
+    <p>Êtes-vous sûr de vouloir supprimer le livre " {{ Book?.title }} " ?</p>
     <div class="grid">
       <button (click)="deleteBook()">Supprimer définitivement</button>
-      <button (click)="cancelButton(book?.id)">Annuler</button>
+      <button (click)="cancelButton(Book?.id)">Annuler</button>
     </div>
   </div>`,
   styleUrls: ['./book-delete.component.css'],

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { book } from '../models/book';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -29,10 +29,17 @@ export class BookService {
       : 1;
   }
 
-  // méthode pour supprimer un livre
   deleteBook(bookId: number): Observable<void> {
-    const URL = `${this.apiURL}/${bookId}`;
-    return this.http.delete<void>(URL);
+    const url = `${this.apiURL}/${bookId}`;
+    return this.http.delete<void>(url).pipe(
+      tap(() => {
+        console.log(`Livre avec ID ${bookId} supprimé avec succès`);
+      }),
+      catchError(error => {
+        console.error(`Erreur lors de la suppression du livre avec ID ${bookId}:`, error);
+        return of();
+      })
+    );
   }
 
   // méthode pour récupérer un livre par son id
