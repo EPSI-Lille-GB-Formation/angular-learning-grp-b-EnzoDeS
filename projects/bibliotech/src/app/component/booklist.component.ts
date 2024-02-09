@@ -1,3 +1,4 @@
+//booklist.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookComponent } from './book.component';
@@ -15,13 +16,13 @@ import { Router } from '@angular/router';
       <h2>Liste des livres:</h2>
       <article>
         <div class="grid">
-          <div><button >Se connecter</button></div>
+          <div><button>Se connecter</button></div>
           <div><button (click)="createBook()">Ajouter un livre</button></div>
         </div>
       </article>
       <div class="listBook">
         <ng-container *ngFor="let book of bookList | async">
-          <app-book [value]="book"></app-book>
+          <app-book [value]="book"  (bookDeleted)="onBookDeleted($event)" ></app-book>
         </ng-container>
       </div>
     </div>
@@ -39,6 +40,11 @@ export class BooklistComponent implements OnInit {
 
   createBook() {
     console.log('Créer un livre');
-    this.router.navigate(['/book-create']);    
+    this.router.navigate(['/book-create']);
+  }
+
+  onBookDeleted(bookId: number): void {
+    // Mettez à jour la liste des livres après la suppression
+    this.bookList = this.bookService.getBooks();
   }
 }

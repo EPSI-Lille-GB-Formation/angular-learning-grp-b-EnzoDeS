@@ -1,6 +1,6 @@
 // book.component.ts
 
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { argv, argv0 } from 'process';
 import { __values } from 'tslib';
 import { book } from '../models/book';
@@ -41,6 +41,7 @@ export class BookComponent {
   @Input('value')
   Book: book | undefined;
   bookList : book[] = [];
+  @Output() bookDeleted: EventEmitter<number> = new EventEmitter<number>();
 
     constructor(private bookService: BookService) {
       
@@ -54,6 +55,7 @@ export class BookComponent {
         this.bookService.getBooks().subscribe(books => {
             this.bookList = books;
             console.log(this.bookList);
+            this.bookDeleted.emit(Book.id);
           })
         
       },
